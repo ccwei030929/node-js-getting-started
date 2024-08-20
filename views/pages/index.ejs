@@ -1,31 +1,3 @@
-<?php
-// index.php
-function readCSV($filename) {
-    $file = fopen($filename, 'r');
-    $headers = fgetcsv($file);
-    $data = [];
-    while (($row = fgetcsv($file)) !== false) {
-        $data[] = array_combine($headers, $row);
-    }
-    fclose($file);
-    return $data;
-}
-
-function processTable2($data) {
-    return [
-        'Alpha' => intval($data[4]['A']) + intval($data[19]['A']),
-        'Beta' => floatval($data[14]['A']) / floatval($data[6]['A']),
-        'Charlie' => floatval($data[12]['A']) * floatval($data[11]['A'])
-    ];
-}
-
-$table1 = readCSV('table1.csv');
-$table2 = processTable2($table1);
-
-header('Content-Type: application/json');
-echo json_encode(['table1' => $table1, 'table2' => $table2]);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
